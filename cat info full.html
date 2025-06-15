@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Selector de Especies y Razas</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      padding: 2rem;
+    }
+
+
+
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgb(0, 0, 0);
+      padding: 2rem;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      background-color: orange;
+      color: white;
+      padding: 1rem;
+      border-radius: 8px;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 1rem;
+    }
+    select {
+      width: 100%;
+      padding: .5rem;
+      margin-top: .5rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    .species-info, .breed-info {
+      display: none;
+      margin-top: 1.5rem;
+      background: #fafafa;
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    .species-info img, .breed-info img {
+      width: 100%;
+      max-width: 600px;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
+    .breed-info h2 {
+      margin-top: 0;
+    }
+    .breed-info p {
+      margin: .5rem 0;
+    }
+    .image-section {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .image-box {
+      flex: 1;
+      text-align: center;
+    }
+    .image-box img {
+      width: 100%;
+      border-radius: 8px;
+    }
+    .image-box p {
+      margin-top: .5rem;
+      font-style: italic;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+
+  <div class="container">
+ 
+    <center>
+     <img src="Logo.jpg" alt="Mi foto" width="270" height="210">
+
+</center>
+    <h1>Elige una Especie y una Raza</h1>
+    <label for="species">Especie:</label>
+    <select id="species">
+      <option value="">--Selecciona especie--</option>
+    </select>
+    <label for="breed">Raza:</label>
+    <select id="breed" disabled>
+      <option value="">--Selecciona raza--</option>
+    </select>
+    <div id="speciesInfo" class="species-info">
+      <h2 id="speciesName"></h2>
+      <p id="speciesDescription"></p>
+      <img id="speciesImage" src="" alt="Imagen de la especie" />
+    </div>
+    <div id="breedInfo" class="breed-info">
+      <h2 id="breedName"></h2>
+      <p><strong>Edad:</strong> <span id="age"></span></p>
+      <p><strong>Curiosidades:</strong> <span id="curios"></span></p>
+      <p id="extra"></p>
+      <div class="image-section">
+        <div class="image-box">
+          <h3>Cachorro</h3>
+          <img id="puppyImage" src="" alt="Imagen de cachorro" />
+          <p>Imagen representativa</p>
+        </div>
+        <div class="image-box">
+          <h3>Adulto</h3>
+          <img id="adultImage" src="" alt="Imagen de adulto" />
+          <p>Imagen representativa</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    
+    const data = {
+      caninos: {
+        description: 'Un canino, enfocado en los perros, es un mamífero carnívoro de la familia Canidae, caracterizado por su gran olfato, comportamiento social, instinto territorial y capacidad de adaptación. Incluye al perro doméstico y a sus parientes como lobos y coyotes.',
+        image: 'caninos.jpeg',
+        breeds: {
+         
+         
+         
+          Chihuahua: {
+            age: '14-18 años',
+            curios: 'Es una de las razas más pequeñas pero de vida más larga.',
+            extra: `El Chihuahua es fácilmente reconocible por su tamaño diminuto, orejas grandes y erguidas, y ojos prominentes y expresivos. Tiene una apariencia alerta y vivaz. Su cuerpo es pequeño pero bien proporcionado, con un peso que no suele superar los 3 kg. Existen dos variedades de pelaje: corto y largo, ambos con una gran diversidad de colores y combinaciones. Su cola es medianamente larga y curvada sobre el lomo.
+
+Es una raza enérgica, afectuosa y muy leal, ideal para personas que buscan un compañero pequeño pero lleno de personalidad. A pesar de su tamaño, es muy valiente y suele crear un fuerte lazo con su dueño.
+
+Durante la etapa de cachorro, es muy activo, curioso y juguetón. Entre el año y los tres años, se convierte en un adulto alerta, que puede ser territorial o reservado con extraños, pero muy cariñoso con su familia. En la etapa sénior, desde los 8 años aproximadamente, puede volverse más tranquilo, aunque algunos conservan su energía por muchos años. Su esperanza de vida es larga, entre 14 y 18 años, si recibe buenos cuidados y un entorno seguro.
+
+En lo veterinario, necesita vacunación regular (séxtuple, rabia), desparasitación y chequeos frecuentes. Es propenso a problemas dentales (por tener la mandíbula pequeña), luxación de rótula, enfermedades cardíacas (como soplos) e hipoglucemia, especialmente cuando es cachorro. También puede presentar problemas respiratorios si es de cráneo más redondeado. Su pelaje requiere cepillado regular (más frecuente si es de pelo largo), y baños cada 3-4 semanas. Es importante mantener su higiene dental desde joven.
+
+En cuanto a comportamiento, es vivaz, muy apegado a su dueño, y puede ser algo desconfiado con extraños. Necesita socialización temprana para evitar conductas territoriales o ladridos excesivos. Aunque es pequeño, requiere estimulación mental, juego diario y paseos breves para mantenerse equilibrado. Se adapta muy bien a espacios interiores, pero disfruta de explorar y moverse. Es una raza que necesita compañía y atención constante, ya que no le gusta quedarse solo por mucho tiempo.`,
+            
+
+            puppyImage: 'chihuahua pe.jpg',
+            adultImage: 'chihuahua.jpg',
+          },
+
+
+
+
+          Pitbull: {
+            age: '12-15 años',
+            curios: 'Raza poderosa y leal, ideal para personas activas y con experiencia.',
+            extra: `El Pitbull es fácilmente reconocible por su cuerpo musculoso, cabeza ancha y mandíbulas fuertes. Tiene una apariencia poderosa y atlética, con ojos medianos, expresivos y redondeados. Su tamaño es mediano, con una altura que varía entre los 45 y 53 cm y un peso que ronda entre los 18 y 30 kg, dependiendo del sexo y la línea genética. Su pelaje es corto, brillante y pegado al cuerpo, con una gran variedad de colores. La cola es de longitud media, gruesa en la base y afinada en la punta.
+
+Es una raza segura de sí misma, leal y muy afectuosa con su familia, ideal para personas activas y con experiencia en el manejo de perros fuertes. A pesar de su fama, bien educado es un compañero equilibrado, protector y amigable.
+
+Durante la etapa de cachorro, es muy enérgico, curioso y con necesidad de socialización constante. Entre el año y los tres años, se convierte en un adulto fuerte y activo que requiere ejercicio diario y límites claros. En la etapa sénior, desde los 7-8 años, puede mantener su energía, pero necesita cuidados articulares y mayor descanso. Su esperanza de vida suele estar entre los 12 y 15 años, si se mantiene activo, con buena alimentación y atención veterinaria regular.
+
+En lo veterinario, necesita vacunación regular (séxtuple, rabia), desparasitación y chequeos frecuentes. Es propenso a alergias cutáneas, displasia de cadera, problemas cardíacos (como estenosis aórtica) y algunas enfermedades hereditarias. Su pelaje corto requiere cepillado semanal y baños cada 4-6 semanas. También necesita limpieza dental frecuente, corte de uñas y control de oídos.
+
+En cuanto a comportamiento, es inteligente, enérgico y muy devoto a su familia. Es sociable si se educa desde pequeño, pero puede ser territorial o dominante con otros perros si no está bien socializado. Requiere ejercicio diario intenso (caminatas largas, juegos de fuerza, estimulación mental) para canalizar su energía. No es ideal para personas sedentarias o primerizas sin apoyo. Bien entrenado, es un perro obediente, equilibrado y muy afectuoso, especialmente con los niños.`,
+           
+
+         puppyImage: 'pitbull pe.jpg',
+            adultImage: 'pitbull.webp'
+          },
+
+
+
+
+
+'Perro mestizo': {
+  age: '12-17 años',
+  curios: 'Gran resistencia, adaptabilidad y variedad física.',
+  extra: `El perro mestizo es fácilmente reconocible por su gran diversidad de tamaños, formas y colores, ya que proviene de la mezcla de diferentes razas. No hay un estándar físico único: puede tener orejas caídas o erectas, pelaje corto o largo, hocico alargado o más chato. Esta variedad le da una apariencia única y muchas veces encantadora. Su tamaño puede variar de pequeño a grande, y su pelaje puede ser liso, rizado, denso o fino.
+
+Es una raza no definida, pero suele ser muy resistente, adaptable y cariñosa, ideal para personas que valoran la personalidad individual de cada perro más que los estándares de raza. Su carácter varía, pero con una buena crianza, la mayoría son compañeros leales, agradecidos y equilibrados.
+
+Durante la etapa de cachorro, muestra una gran variedad de comportamientos, pero en general son curiosos, juguetones y muy apegados a sus cuidadores. Entre el año y los tres años, se desarrolla su temperamento adulto, que puede ser activo, tranquilo, protector o amigable, según su genética y crianza. En la etapa sénior, desde los 7-9 años, puede volverse más calmado y necesitar cuidados especiales según su tamaño. Su esperanza de vida es muy variable, pero muchos viven entre 12 y 17 años, especialmente si son de tamaño mediano y reciben buenos cuidados.
+
+En lo veterinario, también requiere vacunación regular (séxtuple, rabia), desparasitación y revisiones periódicas. Suele ser más resistente a enfermedades genéticas que los perros de raza pura, pero sus necesidades de salud dependerán de su constitución y origen. El cuidado del pelaje dependerá de su tipo: algunos necesitarán cepillado frecuente y otros solo ocasional. Los baños pueden hacerse cada 4-6 semanas, y también es importante cuidar su higiene dental, ocular y cortar las uñas regularmente.
+
+En cuanto a comportamiento, es muy variable pero, en general, los mestizos tienden a ser perros nobles, fieles, adaptables y agradecidos. Se vinculan muy fuerte con quienes los cuidan y suelen responder bien al entrenamiento con refuerzo positivo. Se adaptan bien tanto a la vida en interiores como exteriores, según su tamaño y nivel de energía. Muchos disfrutan del juego, el paseo y la interacción social, por lo que necesitan atención, estimulación y amor constante.`,
+  
+
+  puppyImage: 'mestizo p pe.jpeg',
+  adultImage: 'mestizo p.jpeg'
+},
+     
+
+
+
+Pugs: {
+  age: '12-15 años',
+  curios: 'Raza pequeña, cariñosa y simpática, con expresión peculiar.',
+  extra: `El Pug es fácilmente reconocible por su cuerpo compacto y robusto, cara muy achatada, hocico corto, ojos grandes y redondos, y arrugas características en la frente. Tiene una expresión simpática y vivaz. Es de tamaño pequeño, con un peso ideal entre 6 y 8 kg. Su pelaje es corto, liso y brillante, generalmente en colores como beige, negro o albaricoque. La cola es corta y enroscada sobre la espalda.
+
+Es una raza sociable, cariñosa y divertida, ideal para personas que buscan un compañero leal, alegre y de fácil convivencia. Le encanta estar cerca de su familia y disfruta tanto del juego como del descanso.
+
+Durante la etapa de cachorro, es juguetón, curioso y muy activo para su tamaño. Entre el año y los tres años, se vuelve un adulto equilibrado que combina momentos de actividad con largos períodos de descanso. En la etapa sénior, desde los 7-8 años, se vuelve más calmado y requiere atención especial para sus vías respiratorias y articulaciones. Su esperanza de vida suele estar entre los 12 y 15 años, si recibe buenos cuidados y control veterinario regular.
+
+En lo veterinario, necesita vacunación regular (séxtuple, rabia), desparasitación, y revisiones frecuentes. Es propenso a enfermedades respiratorias debido a su braquicefalia (hocico chato), como el síndrome braquicefálico, así como a problemas oculares (por sus ojos grandes y expuestos), sobrepeso, alergias cutáneas y luxación de rótula. Su pelaje requiere cepillado frecuente para controlar la caída de pelo, y se recomienda bañarlo cada 3-4 semanas. También necesita cuidado especial en la limpieza de los pliegues de su cara, así como en la higiene dental y el corte de uñas.
+
+En cuanto a comportamiento, es muy amigable, sociable y adaptable. Le encanta estar con su familia, es poco territorial y se lleva bien con niños y otros animales. No es excesivamente activo, pero necesita juegos suaves y paseos diarios para mantenerse en forma. No tolera bien el calor ni el ejercicio excesivo debido a sus vías respiratorias. Es un perro fácil de manejar, muy apegado, y que prefiere ambientes tranquilos y estables.`,
+  
+
+  puppyImage: 'pug pe.jpg',
+  adultImage: 'pug.jpg'
+},
+
+
+
+        Schnauzer: {
+  age: '10-15 años (según tamaño)',
+  curios: 'Raza con barba y cejas distintivas, muy inteligente y vigilante.',
+  extra: `El Schnauzer es fácilmente reconocible por su barba prominente, cejas pobladas y pelaje denso y áspero al tacto. Tiene una expresión alerta y vivaz, con orejas triangulares (erguidas o dobladas) y ojos oscuros y expresivos. Existen tres tamaños: Miniatura, Mediano (Estándar) y Gigante, pero todos comparten la misma apariencia típica. Su pelaje suele ser de color sal y pimienta, negro o negro y plata. La cola es generalmente recta y de inserción alta.
+
+Es una raza inteligente, leal y activa, ideal para personas que buscan un perro enérgico, protector y muy conectado con su familia. Es conocido por su carácter equilibrado y su gran capacidad de aprendizaje.
+
+Durante la etapa de cachorro, es curioso, alerta y con mucha energía. Aprende rápido, pero requiere una educación constante y afectuosa. Entre el año y los tres años, se vuelve un adulto seguro, con una gran necesidad de ejercicio y estimulación mental. En la etapa sénior, desde los 7-9 años, puede conservar su energía, pero empieza a requerir cuidados en articulaciones y visión. Su esperanza de vida varía según el tamaño: el miniatura vive entre 12 y 15 años, el mediano entre 12 y 14 años, y el gigante entre 10 y 12 años.
+
+En lo veterinario, necesita vacunación regular (séxtuple, rabia), desparasitación y chequeos frecuentes. Es propenso a enfermedades como pancreatitis, problemas urinarios (especialmente cálculos), alergias en la piel, cataratas (en el miniatura), y displasia de cadera (en el gigante). Su pelaje requiere cepillado regular y corte especializado (stripping o máquina) cada 6-8 semanas. También necesita limpieza frecuente de su barba, higiene dental y corte de uñas.
+
+En cuanto a comportamiento, es vivaz, protector y muy apegado a su familia. Tiende a ser territorial y puede ladrar ante ruidos o extraños, por lo que es un buen perro guardián. Se lleva bien con niños y otras mascotas si se socializa desde pequeño. Necesita paseos diarios, juegos activos y entrenamiento mental para evitar aburrimiento. Es obediente y aprende con rapidez, pero requiere una familia que le dedique tiempo y atención.`,
+ 
+
+  puppyImage: 'scha pe.jpeg',
+  adultImage: 'scha.jpg',
+},
+
+
+
+Husky: {
+  age: '12-15 años',
+  curios: 'Raza de apariencia loboide, muy activa y con ojos frecuentemente azules o heterocromáticos.',
+  extra: `El Husky Siberiano es fácilmente reconocible por su apariencia loboide, ojos almendrados que pueden ser azules, marrones o de diferente color (heterocromía), y su pelaje espeso y de doble capa. Tiene orejas triangulares y erguidas, y una cola peluda en forma de hoz que suele enroscar sobre el lomo. Es de tamaño mediano, con un peso entre 16 y 27 kg, dependiendo del sexo, y una constitución atlética, ágil y resistente.
+
+Es una raza muy activa, independiente y amigable, ideal para personas deportistas o familias con espacio y tiempo para dedicarle. Tiene un fuerte instinto de manada y necesita compañía constante, ya sea humana o de otros perros.
+
+Durante la etapa de cachorro, es juguetón, curioso y muy travieso. Requiere una socialización y educación constantes. Entre el año y los tres años, se convierte en un adulto lleno de energía, explorador y algo terco, pero muy sociable. En la etapa sénior, desde los 8 años, suele conservar actividad, aunque necesita cuidados articulares y de movilidad. Su esperanza de vida está entre los 12 y 15 años si recibe buenos cuidados, ejercicio regular y una dieta adecuada.
+
+En lo veterinario, necesita vacunación regular (séxtuple, rabia), desparasitación y chequeos de rutina. Es propenso a displasia de cadera, problemas oculares (como cataratas, atrofia progresiva de retina), hipotiroidismo y, en algunos casos, epilepsia. Su pelaje requiere cepillado frecuente, especialmente en época de muda (primavera y otoño), cuando pierde grandes cantidades de pelo. No se recomienda rapar su pelaje. Los baños deben hacerse cada 1-2 meses. También es necesario mantener su higiene dental y cortar las uñas con regularidad.
+
+En cuanto a comportamiento, es muy activo, sociable y cariñoso, aunque también independiente y testarudo. No es un perro guardián agresivo, ya que suele ser amigable incluso con desconocidos. Necesita mucho ejercicio diario (caminatas largas, correr, juegos de agilidad o trineo), y se aburre fácilmente si no se le estimula. Es importante tener un entorno seguro, ya que tiende a escaparse o excavar si se siente aburrido. Responde bien al entrenamiento con paciencia y constancia, aunque no es ideal para dueños primerizos.`,
+ 
+
+  puppyImage: 'husky pe.jpeg',
+  adultImage: 'husky.webp'
+},
+
+
+
+
+         'Pastor Aleman': {
+  age: '10-13 años',
+  curios: 'Raza versátil, protectora e inteligente, ampliamente usada en labores policiales y de asistencia.',
+  extra: `El Pastor Alemán es fácilmente reconocible por su cuerpo fuerte, alargado y musculoso, orejas grandes y erguidas, y expresión inteligente y vigilante. Tiene un pelaje doble denso, generalmente de color negro con fuego (marrón claro), aunque también existen variedades totalmente negras, grises o blancas. Su cola es larga, espesa y ligeramente curvada hacia abajo. Es de tamaño grande, con un peso que varía entre 22 y 40 kg, dependiendo del sexo.
+
+Es una raza muy inteligente, leal y protectora, ideal para personas activas que buscan un perro versátil, entrenable y con fuerte instinto de guardia y trabajo. Es ampliamente usado en tareas policiales, de rescate y como perro de asistencia por sus altas capacidades cognitivas.
+
+Durante la etapa de cachorro, es curioso, muy activo y con gran facilidad para aprender. Requiere socialización y entrenamiento temprano. Entre el año y los tres años, se convierte en un adulto vigilante, protector y obediente si se ha criado con disciplina positiva. En la etapa sénior, desde los 8 años, puede presentar desgaste articular y necesita cuidados especiales. Su esperanza de vida suele estar entre los 10 y 13 años, si se mantiene con buena alimentación, ejercicio y atención veterinaria regular.
+
+En lo veterinario, necesita vacunación periódica (séxtuple, rabia), desparasitación y revisiones constantes. Es propenso a displasia de cadera y codo, enfermedades digestivas (como torsión gástrica), alergias y problemas degenerativos (como mielopatía degenerativa). Su pelaje requiere cepillado frecuente, sobre todo en época de muda, y baños mensuales. También es importante cuidar su higiene dental, cortar las uñas y limpiar sus oídos.
+
+En cuanto a comportamiento, es obediente, inteligente y muy leal a su familia. Tiene un fuerte instinto de protección, por lo que es importante socializarlo bien desde pequeño para evitar actitudes excesivamente territoriales o nerviosas. Necesita ejercicio diario intenso y estimulación mental (juegos de obediencia, rastreo, entrenamiento). Se adapta bien a interiores amplios, pero lo ideal es que tenga acceso a espacios abiertos o mucho paseo. Es un perro que responde muy bien al adiestramiento y es muy sensible al vínculo con su guía.`,
+  
+
+  puppyImage: 'aleman pe.jpg',
+  adultImage: 'aleman.png'
+},
+
+
+
+
+       Boxer: {
+  age: '10-12 años',
+  curios: 'Raza muy expresiva, enérgica y leal, ideal para familias activas con niños.',
+  extra: `El Boxer es fácilmente reconocible por su cuerpo musculoso, atlético y proporcionado, su cara de expresión alerta y simpática, y su hocico corto con mandíbula inferior prominente (prognatismo). Tiene ojos oscuros y expresivos, orejas altas (a veces recortadas en algunos países) y una cola de inserción alta (a menudo naturalmente corta o recortada donde está permitido). Su pelaje es corto, brillante y pegado al cuerpo, con colores típicos como leonado, atigrado y a veces con manchas blancas.
+
+Es una raza enérgica, juguetona y muy leal, ideal para personas activas y familias con niños. Su carácter es equilibrado y protector, y es conocido por su entusiasmo y apego a su núcleo familiar.
+
+Durante la etapa de cachorro, es muy activo, curioso y necesita educación firme y paciente. Es algo torpe por su energía y tamaño, pero muy amigable. Entre el año y los tres años, se convierte en un adulto fuerte, vigilante y juguetón que requiere actividad física diaria. En la etapa sénior, desde los 7-8 años, disminuye su nivel de energía y puede empezar a presentar problemas articulares o cardíacos. Su esperanza de vida suele estar entre los 10 y 12 años, si se mantiene con buena salud y atención regular.
+
+En lo veterinario, necesita vacunación completa (séxtuple, rabia), desparasitación y controles frecuentes. Es propenso a problemas cardíacos (miocardiopatía), displasia de cadera, alergias cutáneas, y en algunos casos, cánceres, especialmente en la piel. También puede padecer de torsión gástrica, por lo que se recomienda alimentarlo en porciones pequeñas y evitar el ejercicio después de comer. Su pelaje corto requiere cepillado semanal y baños cada 4-6 semanas. También necesita higiene dental, corte de uñas y control de oídos.
+
+En cuanto a comportamiento, es alegre, leal, juguetón y muy expresivo. Tiene un fuerte apego a su familia, es excelente con niños y suele ser muy sociable si se lo educa desde pequeño. Puede ser protector, por lo que necesita socialización para evitar conductas territoriales excesivas. Le encanta el ejercicio, los juegos activos y las actividades al aire libre. Es un perro sensible, inteligente y con gran capacidad para el adiestramiento, aunque necesita constancia y refuerzo positivo.`,
+  
+
+  puppyImage: 'boxer pe.jpg',
+  adultImage: 'boxer.jpg'
+},
+        }
+      },
+
+
+
+      felinos: { description: 'Un felino, centrado en los gatos, es un mamífero carnívoro de la familia Felidae, al que pertenece el gato doméstico (Felis catus). Se caracteriza por su agilidad, visión nocturna, comportamiento independiente y habilidades de caza. Aunque domésticos, conservan muchos instintos salvajes como el acecho y el salto preciso.',
+       image: 'felinos.avif',
+       breeds:{
+        
+     Siames: {
+      age: '12-15 años',
+      curios: 'Cambia de color con la temperatura: sus extremidades son más oscuras porque están más frías.',
+       extra: `
+
+El gato siamés es una raza de tamaño mediano con cuerpo delgado, elegante y musculoso. Tiene un pelaje corto y fino, generalmente de color claro con manchas más oscuras en la cara, orejas, patas y cola, además de unos característicos ojos azules y orejas grandes y puntiagudas. Es muy sociable, cariñoso y vocal, busca constantemente la atención de sus humanos y no le gusta estar solo por mucho tiempo.
+
+Durante su etapa de cachorro, hasta el año de edad, es muy activo, curioso y necesita compañía constante. Al llegar a la adultez, entre el año y los siete años, mantiene un carácter juguetón y apegado, aunque un poco más estable. En su etapa sénior, a partir de los siete años, suele volverse más tranquilo pero conserva su afecto por las personas. Su esperanza de vida es de entre 12 y 15 años, aunque con buenos cuidados puede vivir hasta los 20.
+
+En cuanto a su salud, requiere vacunas básicas como la trivalente, leucemia y rabia, además de desparasitaciones regulares y chequeos veterinarios anuales. Es una raza propensa a problemas renales y cardíacos, por lo que es importante vigilar su salud desde joven. No necesita baños frecuentes, pero sí cepillado semanal, limpieza dental y revisión de oídos y uñas. Tiene un alto nivel de energía, por lo que necesita juegos diarios e interacción.
+
+El siamés es muy inteligente, fácil de entrenar con refuerzo positivo, y suele aprender rápidamente rutinas o comandos básicos. Es sensible al aburrimiento y al estrés, que puede manifestar con maullidos insistentes, ansiedad o conductas destructivas. Por ello, se recomienda brindarle un ambiente enriquecido y mucha compañía humana.`,
+
+ puppyImage: 'siames pe.webp',
+  adultImage: 'siames.webp'
+     },
+
+
+      'Maine Coon': {  
+          age: '12-15 años',
+      curios: 'Le encanta el agua, algo poco común en los gatos.',
+       extra: `
+
+El Maine Coon es una de las razas más grandes de gatos domésticos, con un cuerpo robusto, musculoso y una apariencia majestuosa. Tiene un pelaje largo, espeso y resistente al frío, con una gran variedad de colores. Sus orejas grandes y con mechones, junto con una cola larga y peluda, le dan un aspecto salvaje y elegante. A pesar de su tamaño, es un gato muy dulce, sociable y tranquilo, que se lleva bien con niños y otras mascotas.
+
+Durante su etapa de cachorro, que puede extenderse hasta los 12 o incluso 18 meses, es curioso, activo y muy juguetón. Al llegar a la adultez, alrededor de los 3 años (ya que maduran lentamente), se estabiliza y muestra un carácter más relajado, aunque mantiene el gusto por jugar. En la etapa sénior, a partir de los 7-8 años, puede volverse más sedentario y necesitar cuidados adicionales. Su esperanza de vida suele estar entre los 12 y 15 años.
+
+A nivel veterinario, necesita vacunas regulares (trivalente, leucemia, rabia), desparasitación y controles anuales. Esta raza puede tener predisposición a enfermedades cardíacas como la miocardiopatía hipertrófica, así como displasia de cadera o problemas renales. Su pelaje requiere cepillado frecuente (al menos 2-3 veces por semana) para evitar nudos, y también se recomienda vigilar la higiene dental, oídos y uñas.
+
+En cuanto a comportamiento, el Maine Coon es dócil, inteligente y algo independiente, pero afectuoso. Aprende fácilmente y responde bien al refuerzo positivo. No es tan vocal como el siamés, pero sí comunicativo. Es ideal para familias activas y tolera bien ambientes con otros animales. Necesita estímulo mental y físico diario, ya que aunque es tranquilo, disfruta mucho del juego.`,
+
+ puppyImage: 'maine pe.webp',
+  adultImage: 'maine.jpg'
+     }, 
+      
+
+      Esfinge: {  
+          age: '12-15 años',
+      curios: 'Necesita baños regulares porque su piel produce grasa sin pelo que la absorba.',
+       extra: `
+
+El gato esfinge (o Sphynx) es conocido por su apariencia única, sin pelaje, piel arrugada y cuerpo musculoso. A pesar de su falta de pelo, tiene una capa fina de vello suave como el terciopelo, y su piel suele mostrar tonos rosados, grises o moteados. Tiene orejas grandes, ojos expresivos y una cola larga y delgada. Es una raza de tamaño mediano, con un cuerpo ágil y bien proporcionado. A nivel de personalidad, es extremadamente afectuoso, juguetón, curioso y sociable. Busca siempre la cercanía de las personas y no le gusta estar solo.
+
+Durante su etapa de cachorro, es muy activo y necesita estímulo constante. Al llegar a la adultez, alrededor del año y medio, mantiene su carácter juguetón pero se vuelve algo más equilibrado. Como sénior, desde los 7-8 años, sigue siendo apegado, aunque puede reducir su nivel de actividad. Su esperanza de vida ronda los 12 a 15 años, aunque con buenos cuidados puede vivir un poco más.
+
+En el plano veterinario, requiere vacunas comunes (trivalente, leucemia, rabia), desparasitación frecuente y chequeos periódicos. Debido a la falta de pelaje, es propenso a problemas de piel, acumulación de grasa y quemaduras solares, por lo que debe vivir en interiores y recibir baños regulares (cada 1-2 semanas). También pueden tener problemas cardíacos como la miocardiopatía hipertrófica. Es importante limpiar sus oídos con regularidad, ya que produce más cera que otras razas.
+
+Comportamentalmente, es una de las razas más cariñosas y activas. Le encanta el contacto físico, dormir cerca de sus dueños y jugar. Aprende fácilmente y es muy sociable con otros animales. Necesita juguetes, rascadores y atención diaria para evitar el aburrimiento, ya que puede volverse ansioso si se siente ignorado o solo.`,
+
+ puppyImage: 'esfinge pe.jpg',
+  adultImage: 'esfinge.jpeg'
+     },
+      
+
+      Persa: {
+            age: '12-17 años',
+      curios: 'Son tranquilos y prefieren ambientes relajados',
+       extra: `El gato persa es fácilmente reconocible por su cuerpo robusto, cara achatada y pelaje largo y denso. Tiene una apariencia elegante y calmada, con ojos grandes y redondos que varían de color según el pelaje. Es de tamaño mediano a grande y su cola es corta, espesa y peluda. Es una raza tranquila, cariñosa y muy hogareña, ideal para personas que buscan un compañero relajado y afectuoso.
+
+Durante la etapa de cachorro, es curioso pero menos inquieto que otras razas. A medida que crece, entre el año y los tres años, se convierte en un adulto sereno que disfruta de la rutina y el descanso. En la etapa sénior, desde los 7-8 años, se vuelve aún más tranquilo y requiere cuidados especiales. Su esperanza de vida suele estar entre los 12 y 17 años, si recibe atención veterinaria constante y vive en un ambiente tranquilo.
+
+En lo veterinario, necesita vacunación regular (trivalente, leucemia, rabia), desparasitación, y revisiones frecuentes. Es propenso a enfermedades respiratorias por su cara plana (braquicefalia), así como a problemas oculares, renales (enfermedad renal poliquística) y cardíacos. Su pelaje requiere cepillado diario para evitar nudos y bolas de pelo, además de baños mensuales. También se debe cuidar la higiene ocular, dental y cortar las uñas con frecuencia.
+
+En cuanto a comportamiento, es muy dócil, poco activo y disfruta de la compañía tranquila. No suele ser juguetón en exceso, pero le gusta la atención suave y los ambientes calmados. Es fácil de manejar, pero no le agradan los cambios bruscos o el ruido. Se adapta bien a interiores y no necesita demasiado ejercicio, aunque se recomienda estimularlo con juguetes suaves y sesiones de juego breves para mantenerlo sano.`,
+
+ puppyImage: 'persa pe.jpeg',
+  adultImage: 'persa.jpg'
+     
+      },
+
+
+     Munchkin: {
+           age: '12-15 años',
+      curios: 'Suele sentarse como una marmota para observar su entorno',
+       extra: `El gato Munchkin es conocido por sus patas cortas, resultado de una mutación genética natural, lo que le da una apariencia única y encantadora. A pesar de su baja estatura, tiene un cuerpo equilibrado y musculoso. Su pelaje puede ser corto o semilargo, en una amplia variedad de colores. Es un gato activo, curioso y muy sociable, que se adapta fácilmente a diferentes entornos y personas.
+
+Durante su etapa de cachorro, es muy juguetón, inquieto y valiente, mostrando desde temprano una gran capacidad de adaptación. Al llegar a la adultez, entre el año y los dos años, mantiene su carácter activo y afectuoso. En la vejez, a partir de los 7 años, se vuelve más tranquilo, pero sigue siendo sociable. Tiene una esperanza de vida de 12 a 15 años si se le proporcionan cuidados adecuados.
+
+Veterinariamente, requiere vacunas básicas (trivalente, leucemia, rabia), desparasitaciones periódicas y controles anuales. Aunque generalmente es sano, puede tener problemas en la columna o las articulaciones debido a su estructura, por lo que se deben evitar saltos desde alturas. Su pelaje requiere cepillado semanal o más frecuente si es semilargo. También necesita limpieza de oídos, corte de uñas y cuidado dental regular.
+
+En comportamiento, es un gato alegre, sociable y muy adaptable. Se lleva bien con niños, otras mascotas y disfruta tanto del juego como de los mimos. Aprende rápido, puede seguir rutinas fácilmente y rara vez muestra agresividad. Le gusta explorar, aunque sus patas cortas limitan su habilidad para saltar alto. Necesita juegos diarios y enriquecimiento ambiental para mantenerse estimulado.`,
+
+ puppyImage: 'munch pe.webp',
+  adultImage: 'munch.jpg'
+     
+     }, 
+     
+     
+    'Gato común europeo': {
+         age: '13_16 años',
+      curios: 'Es excelente cazador y muy independiente',
+       extra: `El Gato Común Europeo es una raza no seleccionada genéticamente, lo que le otorga una gran diversidad en colores, tamaños y patrones. Su cuerpo es fuerte y bien proporcionado, con musculatura desarrollada y pelaje corto, denso y fácil de mantener. Es un gato resistente, adaptable y muy equilibrado. Su personalidad puede variar, pero en general es independiente, inteligente y afectuoso cuando establece confianza.
+
+De cachorro es muy juguetón, curioso y activo, con una gran necesidad de explorar. Al llegar a la adultez, alrededor del año de edad, suele volverse más independiente y territorial, aunque sigue mostrando afecto con quienes confía. En la vejez, a partir de los 7-8 años, se vuelve más tranquilo y necesita un entorno más estable. Su esperanza de vida ronda los 13 a 16 años, aunque puede vivir más si tiene una buena calidad de vida.
+
+A nivel veterinario, necesita las vacunas estándar (trivalente, leucemia, rabia), desparasitación frecuente y controles anuales. Por ser una raza muy variada genéticamente, no tiene muchas enfermedades hereditarias comunes, lo que la hace bastante sana y resistente. Su pelaje requiere poco mantenimiento, bastando con un cepillado semanal, junto con cuidados regulares de uñas, oídos y dientes.
+
+En cuanto a comportamiento, el gato común europeo es inteligente, observador y suele ser territorial. Puede convivir bien con otras mascotas si se socializa desde pequeño. Aprende rápido y se adapta tanto a la vida en interiores como al aire libre (si está en un entorno seguro). Es independiente, pero también sabe buscar cariño y compañía cuando lo desea. Necesita estimulación mental, espacio para moverse y juguetes que imiten la caza.`,
+
+ puppyImage: 'europeo pe.webp',
+  adultImage: 'europeo.jpg'
+     
+     },
+     
+     
+     'Gato mestizo': {
+          age: '12-16',
+      curios: 'Raza muy expresiva, enérgica y leal, ideal para familias activas con niños',
+       extra: `El gato mestizo es el resultado del cruce libre entre distintas razas y no posee características físicas específicas, lo que da una gran variedad en tamaño, pelaje y colores. Su cuerpo suele ser robusto y ágil, y su pelaje puede ser corto, semilargo o largo, dependiendo de sus antepasados. Es una raza muy adaptable, resistente y con un temperamento variable, que puede ir desde muy independiente hasta muy cariñoso según su socialización y entorno.
+
+De cachorro, el mestizo suele ser activo, curioso y con gran capacidad de aprendizaje. Como adulto, su comportamiento se estabiliza, aunque su personalidad puede variar mucho; algunos son muy juguetones, otros más tranquilos. En su etapa sénior, alrededor de los 7-10 años, tiende a reducir su actividad y demanda más descanso. Su esperanza de vida promedio está entre 12 y 16 años, influenciada por factores como alimentación y cuidados veterinarios.
+
+En términos veterinarios, requiere las vacunas comunes, desparasitación periódica y revisiones regulares. Generalmente son gatos resistentes, pero pueden presentar problemas comunes como enfermedades dentales o parasitarias si no se cuidan adecuadamente. Su aseo depende del tipo de pelaje, desde cepillados semanales hasta más frecuentes en pelajes largos, junto con limpieza de oídos, uñas y cuidados dentales.
+
+En cuanto a comportamiento, el gato mestizo es versátil y se adapta a distintos ambientes y familias. Puede ser muy sociable y cariñoso si se le brinda atención, o más reservado si ha tenido poca interacción humana. Aprende con facilidad y responde bien al refuerzo positivo. Necesita estimulación mental y física para evitar el aburrimiento y mantener un buen bienestar .`,
+
+
+ puppyImage: 'mestizo pe.jpeg',
+  adultImage: 'mestizo.jpg'
+     
+     } } },
+      
+      
+    
+      
+      
+       roedores: { description: 'Un roedor, centrado en animales como los ratones o hámsters, es un mamífero pequeño de la orden Rodentia, caracterizado por tener dientes incisivos grandes y en constante crecimiento. Son animales ágiles, curiosos y adaptables, que roen constantemente para desgastar sus dientes. Muchos son sociales y activos, y algunos, como los hámsters o cobayas, son comunes como mascotas.', 
+       image: 'roedores.jpg', 
+       breeds: {
+
+
+         'raton domestico ': {
+      age: '1-3 años',
+      curios: 'Sus dientes nunca dejan de crecer, por eso necesitan roer constantemente',
+       extra: `El ratón doméstico (o Mus musculus) es un pequeño roedor fácilmente reconocible por su cuerpo compacto, orejas redondeadas, ojos oscuros y cola larga y delgada. Su pelaje puede variar en color —desde blanco, gris, marrón hasta negro— y suele ser corto, aunque hay variedades de pelo largo. Es un animal ágil y de movimientos rápidos, con un sentido del olfato muy desarrollado y una apariencia vivaz y curiosa.
+
+Durante la etapa de cría (hasta los 2 meses), es muy activo, explorador e inquieto. A partir de los 2 a 6 meses entra en la adultez joven, donde se muestra muy activo, curioso y sociable, especialmente si ha sido bien socializado desde pequeño. Al llegar a la etapa adulta avanzada, cerca del año y medio o dos años, se vuelve un poco más tranquilo, aunque conserva su interés por explorar. La esperanza de vida promedio de un ratón doméstico en buenas condiciones es de 1.5 a 2.5 años, aunque algunos alcanzan los 3 años con cuidados óptimos.
+
+En lo veterinario, requiere revisiones periódicas con un veterinario especializado en animales exóticos. No necesita vacunas obligatorias, pero sí desparasitaciones regulares y seguimiento de su estado general. Es propenso a enfermedades respiratorias, tumores mamarios (especialmente en hembras), dermatitis, infecciones oculares y problemas dentales si no se le proporciona una dieta adecuada. La limpieza de su jaula y un entorno libre de estrés son fundamentales para evitar enfermedades.
+
+En cuanto a comportamiento, es un animal muy activo, social y curioso. Suele disfrutar la compañía de otros ratones, sobre todo si se cría en grupos del mismo sexo. Puede acostumbrarse a la manipulación humana si se le trata con paciencia y suavidad desde joven. Aunque no necesita mucho espacio, sí requiere un entorno enriquecido con túneles, ruedas, escondites y materiales para roer. No es agresivo y rara vez muerde, a menos que se sienta amenazado o mal manejado. Es ideal para personas que disfrutan observar su comportamiento activo y les pueden brindar un ambiente tranquilo y enriquecido.`,
+      
+      
+       puppyImage: 'domestico pe.jpg',
+  adultImage: 'domestico.jpg'
+     
+    
+      
+         }, 
+         
+         'conejillo de indias': {
+      age: '5-10 años',
+      curios: 'No pueden producir vitamina C, así que necesitan recibirla en la dieta como los humanos',
+       extra: `
+El conejillo de Indias (o Cavia porcellus) es un roedor de cuerpo redondeado, patas cortas y sin cola visible. Tiene un rostro dulce, ojos grandes y expresivos, y orejas pequeñas. Es de tamaño mediano, con un peso que puede oscilar entre 800 y 1200 gramos en la edad adulta.
+
+Durante la etapa de cría (hasta los 2-3 meses), es muy curioso y se muestra nervioso ante nuevos estímulos, aunque rápidamente se adapta si recibe un trato gentil. A partir de los 4 meses entra en la adultez, donde se vuelve más confiado y cariñoso. En la etapa sénior, desde los 5 años en adelante, reduce su actividad y necesita cuidados especiales. Su esperanza de vida es de 5 a 8 años, aunque algunos ejemplares bien cuidados pueden vivir hasta los 10 años.
+
+En lo veterinario, el conejillo de Indias requiere desparasitación periódica, chequeos regulares con un veterinario exótico y una dieta rica en vitamina C, ya que su organismo no la produce. No existen vacunas específicas para ellos, pero es fundamental vigilar su salud bucal, digestiva y respiratoria. Son propensos a problemas dentales, deficiencia de vitamina C (escorbuto), infecciones respiratorias y sobrecrecimiento de las uñas. También requieren una higiene adecuada de su hábitat para prevenir infecciones por hongos o bacterias.
+
+En cuanto a comportamiento, es un animal muy sociable, tranquilo y afectuoso. No le gusta la soledad, por lo que se recomienda tenerlo en pareja o grupo del mismo sexo. Se comunica a través de chillidos, silbidos y otros sonidos que reflejan su estado de ánimo. Es fácil de domesticar y, con el tiempo, reconoce a sus cuidadores, especialmente si se les habla con suavidad y se les ofrece comida de la mano. Prefiere ambientes estables, sin ruidos fuertes ni cambios bruscos. No requiere ejercicio intenso, pero sí espacio suficiente y enriquecimiento ambiental con escondites, túneles y juguetes suaves.`,
+      
+      
+       puppyImage: 'cuyo pe.jpg',
+  adultImage: 'cuyo.jpg'
+     
+    
+      
+         },
+          hamster: {
+      age: '1-3 años ',
+      curios: 'No tienen buena vista, pero su sentido del olfato y oído son muy agudos',
+       extra: `El hámster es un pequeño roedor de cuerpo compacto, mejillas amplias (que usa para almacenar comida), patas cortas y cola casi imperceptible. Su pelaje es suave y puede presentarse en una amplia gama de colores: dorado, blanco, gris, negro o combinaciones.  
+
+Durante la etapa de cría (hasta las 6 semanas), los hámsters son muy activos, exploradores y algo nerviosos. Entre los 2 y 12 meses entran en la adultez, mostrando su personalidad definitiva: algunos son más tranquilos, otros muy enérgicos. A partir del año y medio se consideran mayores, y a menudo se vuelven menos activos. Su esperanza de vida es corta: entre 1.5 y 3 años, dependiendo de la especie, genética y cuidados que reciba.
+
+En lo veterinario, no requieren vacunación, pero sí controles de salud regulares con veterinarios especializados en animales pequeños. Es importante mantenerlos desparasitados y vigilarlos por problemas dentales, tumores, infecciones respiratorias, abscesos o caída de pelo. El entorno limpio y una dieta adecuada previenen muchas enfermedades. También es crucial revisar sus dientes y uñas regularmente, ya que pueden crecer en exceso.
+
+En cuanto a comportamiento, el hámster es un animal nocturno y territorial (especialmente el sirio, que debe vivir solo). Puede llegar a reconocer a su cuidador si se le manipula con calma y constancia. Es curioso, le encanta excavar, correr en su rueda y esconder comida. No es muy afectuoso como otros roedores, pero sí divertido de observar y fácil de cuidar. Requiere una jaula amplia, enriquecida con túneles, casitas, material para roer y actividades que lo mantengan ocupado. No tolera bien el ruido ni los cambios bruscos, y es sensible al calor extremo.`,
+      
+      
+       puppyImage: 'hamster pe.jpg',
+  adultImage: 'hamster.jpg'
+     
+    
+      
+          }
+        
+        
+        } },
+
+
+      conejos: {
+       description: 'Los conejos son mamíferos herbívoros del orden Lagomorpha (no son roedores, aunque se parecen). Se caracterizan por sus orejas largas, dientes incisivos en crecimiento continuo, y una gran capacidad de reproducción y salto. Son animales sociales, activos y suelen vivir en madrigueras. Muchos se crían como mascotas o animales de granja.',
+       image: 'conejos.jpg',
+       breeds: {
+        
+        'conejo lop': {
+      age: '8-12 años',
+      curios: 'Sus orejas caídas no ventilan tan bien, por lo que hay que estar atentos a la higiene y el calor',
+       extra: `El conejo Lop es fácilmente reconocible por sus orejas caídas y su aspecto tierno. Hay varias variedades (Holland, Mini, French Lop), que varían en tamaño (1,2 a más de 5 kg), pero todos comparten un carácter muy dócil y cariñoso. Tienen cuerpo compacto, pelaje suave y vienen en muchos colores.
+
+Son animales tranquilos, afectuosos y sociables, ideales para familias. Se llevan bien con niños y otras mascotas, y aprenden rápido (pueden usar bandeja y responder a su nombre si se entrena con refuerzo positivo).
+
+En sus primeras semanas son activos y curiosos; al crecer, se vuelven más calmados. Su esperanza de vida es de 8–10 años (hasta 12 con buenos cuidados).
+
+Cuidados veterinarios básicos incluyen vacunas (mixomatosis y VHD), desparasitación y chequeos anuales. Son propensos a infecciones de oído (por las orejas caídas), problemas dentales y obesidad si no hacen ejercicio.
+
+No se bañan; se cepillan semanalmente, se limpian las orejas, se cortan las uñas mensualmente y se revisan dientes y encías.
+
+Necesitan mínimo 2 horas de ejercicio diario con juguetes como túneles, pelotas o mordedores. Si se aburren, pueden aislarse o morder objetos. La clave es ofrecer compañía, juegos y rutinas estables.`,
+      
+      
+       puppyImage: 'lop pe.jpg',
+  adultImage: 'lop.jpeg'
+        }, 
+        
+        
+        'conejo toy': {
+      age: '8-10 años',
+      curios: 'Requiere manipulación suave: son frágiles y se asustan fácilmente si no se les trata con cuidado',
+       extra: `El conejo Toy (también llamado enano o miniatura) es una de las razas más pequeñas, pesando entre 0,8 y 1,3 kg. Tiene un cuerpo compacto, pelaje corto o medio, y orejas cortas y erguidas. Viene en muchos colores y es muy popular por su tamaño y ternura.
+
+Tiene un carácter curioso, inteligente y algo independiente, aunque puede ser muy cariñoso si se socializa desde pequeño. Son activos y necesitan estímulos, pero también disfrutan del descanso y la tranquilidad.
+
+De cachorros son muy juguetones y sensibles; al crecer se vuelven más estables y afectuosos. En la vejez (desde los 5 años), pueden volverse más tranquilos. Su esperanza de vida es de 8 a 10 años, dependiendo de los cuidados.
+
+A nivel veterinario, necesitan vacunas (mixomatosis, VHD-1 y 2), desparasitación regular y chequeos anuales. Son propensos a problemas dentales y digestivos, y al estrés o golpes de calor por su tamaño reducido.
+
+No se bañan. Requieren cepillado 1–2 veces por semana, corte de uñas mensual, revisión dental y limpieza de orejas.
+
+Necesitan al menos 2 horas diarias de ejercicio fuera de la jaula. Juguetes simples como túneles, pelotas o cajas los ayudan a mantenerse activos.
+
+Si se aburren, pueden morder cosas, esconderse o perder el apetito. Lo mejor es darles compañía, juegos y rutinas constantes.`,
+      
+      
+       puppyImage: 'toy pe.webp',
+  adultImage: 'toy.jpg'
+        }, 
+        
+        
+        'conejo cabeza de leon': {
+      age: '8-10',
+      curios: 'Este pelaje tan especial requiere cepillado frecuente para evitar nudos',
+       extra: `El conejo cabeza de león es una raza pequeña, con un peso entre 1,3 y 1,7 kg, y destaca por su melena larga alrededor de la cabeza que le da un aspecto único. Tiene un cuerpo compacto, pelaje suave y orejas cortas o medianas. Viene en muchos colores.
+
+Es curioso, sociable y puede ser muy cariñoso si se socializa desde pequeño. Es activo, le gusta jugar, pero también descansar.
+
+De cachorro es juguetón y algo sensible; al crecer se vuelve más tranquilo y afectuoso. Vive entre 8 y 10 años con buenos cuidados.
+
+Necesita vacunas, desparasitación y chequeos veterinarios regulares. Su pelaje requiere cepillados frecuentes (2-3 veces por semana) para evitar nudos, además de corte de uñas mensual y limpieza de orejas.
+
+Requiere al menos 2 horas diarias de ejercicio fuera de la jaula y juguetes para mantenerse activo. Si se aburre, puede morder o esconderse, por eso es importante darle compañía y juegos.`,
+      
+      
+       puppyImage: 'leon pe.jpg',
+  adultImage: 'leon.avif'
+        } 
+    
+
+
+    } }
+    };
+
+    const speciesSelect = document.getElementById('species');
+    const breedSelect = document.getElementById('breed');
+    const speciesInfo = document.getElementById('speciesInfo');
+    const breedInfo = document.getElementById('breedInfo');
+
+    Object.keys(data).forEach(sp => {
+      const opt = document.createElement('option');
+      opt.value = sp;
+      opt.textContent = sp.charAt(0).toUpperCase() + sp.slice(1);
+      speciesSelect.appendChild(opt);
+    });
+
+    speciesSelect.addEventListener('change', () => {
+      const sp = speciesSelect.value;
+      breedSelect.innerHTML = '<option value="">--Selecciona raza--</option>';
+      breedSelect.disabled = true;
+      speciesInfo.style.display = 'none';
+      breedInfo.style.display = 'none';
+
+      if (sp) {
+        const s = data[sp];
+        document.getElementById('speciesName').textContent = sp.charAt(0).toUpperCase() + sp.slice(1);
+        document.getElementById('speciesDescription').textContent = s.description;
+        document.getElementById('speciesImage').src = s.image;
+        speciesInfo.style.display = 'block';
+
+        Object.keys(s.breeds).forEach(br => {
+          const opt = document.createElement('option');
+          opt.value = br;
+          opt.textContent = br;
+          breedSelect.appendChild(opt);
+        });
+        breedSelect.disabled = false;
+      }
+    });
+
+    breedSelect.addEventListener('change', () => {
+      const sp = speciesSelect.value;
+      const br = breedSelect.value;
+      if (sp && br) {
+        const breedData = data[sp].breeds[br];
+        document.getElementById('breedName').textContent = br;
+        document.getElementById('age').textContent = breedData.age || '';
+        document.getElementById('curios').textContent = breedData.curios || '';
+        document.getElementById('extra').textContent = breedData.extra || '';
+        document.getElementById('puppyImage').src = breedData.puppyImage || '';
+        document.getElementById('adultImage').src = breedData.adultImage || '';
+
+        speciesInfo.style.display = 'none';
+        breedInfo.style.display = 'block';
+      } else {
+        breedInfo.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>

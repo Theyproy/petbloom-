@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PetBloom</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 2rem;
+      background: #f5f5f5;
+      font-family: Arial, sans-serif;
+      color: white;
+      text-shadow: 2px 2px 3px #000;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgb(0, 0, 0);
+      padding: 2rem;
+      color: #333;
+      text-shadow: none;
+      position: relative;
+    }
+
+    header {
+      margin: 20px auto;
+      max-width: 460px;
+      border: 3px solid #000;
+      text-align: center;
+    }
+
+    header img {
+      width: 100%;
+      max-width: 450px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+
+    nav {
+      max-width: 80%;
+      margin: 20px auto;
+      padding: 15px 0;
+    }
+
+    .nav-section {
+      background-color: #ff7605c2;
+      margin-bottom: 12px;
+      padding: 12px;
+      color: white;
+      border: 3px solid #000;
+      border-radius: 20px;
+    }
+
+    .action-btn {
+      display: inline-block;
+      margin: 1rem auto;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      color: #fff;
+      background-color: #ff5a5a;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    #loadingOverlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 1000;
+    }
+
+    .loading-box {
+      background: #fff;
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    /* Contenedor para alinear huellas horizontalmente */
+    .paw-container {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .paw {
+      width: 50px;
+      height: auto;
+      opacity: 0;
+      animation: pawFade 1.5s infinite;
+    }
+    .paw-container .paw:nth-child(1) { animation-delay: 0s; }
+    .paw-container .paw:nth-child(2) { animation-delay: 0.5s; }
+    .paw-container .paw:nth-child(3) { animation-delay: 1s; }
+
+    @keyframes pawFade {
+      0%   { opacity: 0; transform: translateY(-10px); }
+      25%  { opacity: 1; transform: translateY(0); }
+      50%  { opacity: 0; transform: translateY(10px); }
+      100% { opacity: 0; }
+    }
+
+    .experimental-text {
+      font-size: 0.8rem;
+      color: #333;
+      margin-bottom: rem 0.1;
+    }
+
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <img src="Logo.jpg" alt="imagen de logo">
+    </header>
+
+    <nav>
+      <div class="nav-section">
+        <h1 class="color-change letter-border" style="font-size:36px; text-decoration:underline;">
+          En PetBloom
+        </h1>
+        <h3 class="letter-border">
+          En PetBloom queremos promover el bienestar y la felicidad de tus mascotas. Creemos que cada animal merece una vida plena, saludable y llena de amor, por eso hemos creado un espacio donde encontrarás información clara, concisa y confiable sobre cada raza, sus cuidados específicos, necesidades particulares y consejos prácticos para su desarrollo óptimo.
+        </h3>
+      </div>
+      <div class="nav-section">
+        <h3 class="letter-border">
+          Nuestra misión es brindar información clara, confiable y accesible sobre el cuidado, bienestar y salud de los animales, fomentando la responsabilidad, el respeto y el amor hacia todas las especies, tanto domésticas como silvestres.…
+        </h3>
+      </div>
+      <div class="nav-section">
+        <h3 class="letter-border">
+          Nuestra visión es ser una fuente de referencia sobre el cuidado animal, contribuyendo a la creación de una sociedad más consciente, empática y comprometida con el bienestar animal en todo el mundo.
+        </h3>
+      </div>
+    </nav>
+
+    <div style="text-align:center;">
+      <button id="loadBtn" class="action-btn">Nuestra informacion</button>
+<br><br><br><br>
+      <!-- Texto y botón de tienda-adopción -->
+      <div class="experimental-text">Botón experimental (no sirve aun)</div> <br>
+    
+      <img src="flecha.jpg" alt="" height="50px" width="50px">
+     <br>
+      <button id="storeBtn" class="action-btn">Tienda - Adopción</button>
+    </div>
+  </div>
+
+  <div id="loadingOverlay">
+    <div class="loading-box">
+      <div style="font-weight:bold; color:#333; font-size:1.2rem;">
+        Espere por favor…
+      </div>
+      <div class="paw-container">
+        <img src="gato huella.png" alt="huella" class="paw">
+        <img src="gato huella.png" alt="huella" class="paw">
+        <img src="gato huella.png" alt="huella" class="paw">
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('loadBtn').addEventListener('click', function() {
+      document.getElementById('loadingOverlay').style.display = 'flex';
+      setTimeout(() => {
+        window.location.href = 'file:///C:/Users/alex/Desktop/chat%20bot%20posibilidad/cat%20info%20full.html';
+      }, 3000);
+    });
+
+    // Redirección del botón Tienda - Adopción
+    document.getElementById('storeBtn').addEventListener('click', function() {
+      window.location.href = 'file:///C:/Users/alex/Desktop/chat%20bot%20posibilidad/adopcion%20y%20tienda.html';
+    });
+  </script>
+</body>
+</html>
+S
